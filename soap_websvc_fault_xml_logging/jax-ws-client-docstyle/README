@@ -1,0 +1,24 @@
+[Keep wsdl soap service running for communication needed for auto generating artifact java classes(jaxb)]
+
+1. Go to client project directory and generate marshal unmarshal code[xml,java] (jaxb)
+C:\Users\sdass\STSworkspace\jax-ws-client-docstyle>
+2. wsimport -keep -verbose -s ./src -d ./bin   http://localhost:9993/whateverurl/helodoc?wsdl
+
+3. After refresh (F5) on client
+		//take advantage of intellisense for the single code below
+		HelloWorldDocStyleIface iface =  new HelloWorldDocStyleImplService().getHelloWorldDocStyleImplPort();
+		done.
+
+4. Later add Fault |Exception class. Once added, MUST regenerate client code to get most control on client side
+5. As best practice Fault exception contains a java bean, must put both getter and setter to reflect jaxb client class generation. 
+Else bean class remains empty (no field) 
+
+6. To get detail xml transport logging use the static block of parameters in client|server side
+https://stackoverflow.com/questions/1945618/tracing-xml-request-responses-with-jax-ws
+
+	static{
+        System.setProperty("com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
+    }
