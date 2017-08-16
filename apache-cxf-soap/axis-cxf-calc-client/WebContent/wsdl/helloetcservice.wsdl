@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HelloEtcServiceService" targetNamespace="http://subra.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://subra.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://subra.com/" version="1.0" xmlns:tns="http://subra.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="multiply" type="tns:multiply"/>
+
+  <xs:element name="multiplyResponse" type="tns:multiplyResponse"/>
+
+  <xs:element name="sayHello" type="tns:sayHello"/>
+
+  <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
+
+  <xs:complexType name="multiply">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="multiplyResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sayHello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sayHelloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="multiply">
+    <wsdl:part name="parameters" element="tns:multiply">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHelloResponse">
+    <wsdl:part name="parameters" element="tns:sayHelloResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="multiplyResponse">
+    <wsdl:part name="parameters" element="tns:multiplyResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHello">
+    <wsdl:part name="parameters" element="tns:sayHello">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HelloEtcService">
+    <wsdl:operation name="multiply">
+      <wsdl:input name="multiply" message="tns:multiply">
+    </wsdl:input>
+      <wsdl:output name="multiplyResponse" message="tns:multiplyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sayHello">
+      <wsdl:input name="sayHello" message="tns:sayHello">
+    </wsdl:input>
+      <wsdl:output name="sayHelloResponse" message="tns:sayHelloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloEtcServiceServiceSoapBinding" type="tns:HelloEtcService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="multiply">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="multiply">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="multiplyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sayHello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sayHello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sayHelloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloEtcServiceService">
+    <wsdl:port name="HelloEtcServicePort" binding="tns:HelloEtcServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8080/axis-cxf-calc-svc/services/HelloEtcServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
